@@ -77,14 +77,19 @@ remotes::install_github("zhiming-chen/chinacolor")
 plot_color_grid(show_group = T)
 ```
 
-目前，尚无函数来支持打印按季节显示颜色的图形，不过，我们可以在[文化图片库](https://github.com/lisa/chinese-culture-project/tree/main/culture_images)。查看全部24个节气的颜色系列。这些图形中包含丰富的颜色信息，包括颜色id(这些id 在本包中方便我们设计调色板时取色)，RGB值，CMYK值，当然，也有HEX值。每个颜色有一个中文名，对于熟悉中文或者对中文感兴趣的人，这也是一种不错的体验。
+目前，尚无函数来支持打印按季节显示颜色的图形，不过，我们可以在[colors_by_solar_term](https://github.com/zhiming-chen/chinacolor/tree/master/image/color/colors_by_solar_term) 中查看全部24个节气的颜色系列。这些图形中包含丰富的颜色信息，包括颜色id(这些id 在本包中方便我们设计调色板时取色)，RGB值，CMYK值，当然，也有HEX值。每个颜色有一个中文名，对于熟悉中文或者对中文感兴趣的人，这也是一种不错的体验。
 
 ### list_colors 快速预览颜色
 
 很多时候，我们需要即时、动态、快速预览并获得颜色，`list_colors`函数，我觉得是一个非常amazing的函数，能帮助我们在Rstudio 中Viewer界面快速预览颜色，并即时获得颜色hex值，总之，我已经非常迷恋这个函数，甚至有点离不开他了。
 
 ```{r eval=TRUE, include=TRUE}
-list_colors()
+
+```
+
+![](figures/list_colors.png)
+
+```{list_colors()}
 ```
 
 是的，你只需在console 里键入`list_colors()`,在Viewer界面就能显示颜色，默认16行一页...
@@ -152,6 +157,8 @@ list_colors()
 list_palettes()
 
 ```
+
+![](figures/list_palettes.png)
 
 我们还可以通过这个函数将这些内置调色板信息导出。
 
@@ -325,8 +332,6 @@ Palette_C
 
 这会是非常easy的事情，前提是你对颜色比较熟悉，可以使用`list_colors()`在Viewer界面里即时浏览颜色。subgroup值与颜色的明度与和饱和度相关。通俗的讲，想要深一点的颜色，subgroup值可以选3,4,否则选1,2.如下示例中，我用一个非常简单的方法获得两组调色板。
 
-
-
 ```{r}
 color_pick_2 <- create_color_pick(groups = 10:15,
                                   subgroups = 3,
@@ -349,7 +354,6 @@ Palette_B
 
 当然，在color_pick里也可以直接输入颜色id,这是最常规的操作，示例从略。
 
-
 到目前为止，我们已熟悉内置颜色和调色板的打印与浏览，能够选择或提取内置的调色板，同时也实现了基于内置颜色的调色板定制。
 
 接下来就是一些简单的使用介绍示例。
@@ -358,7 +362,7 @@ Palette_B
 
 `ctc_palette`函数输出一组颜色hex值，这些输出可直接作为颜色的value用于ggplot绘图。
 
-+  离散色 + 填充 场景
+-   离散色 + 填充 场景
 
 ```{r}
 ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
@@ -374,8 +378,7 @@ ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
     scale_fill_manual(values = Palette_A)
 ```
 
-
-+  离散色 + 颜色 场景
+-   离散色 + 颜色 场景
 
 选择内置定性型调色板
 
@@ -385,8 +388,7 @@ ggplot(data = iris,aes(x = Sepal.Length  ,y = Sepal.Width  ,color = Species))+
     scale_color_manual(values = ctc_palette(type = "built_in",palette_name = 44,n = 3))
 ```
 
-
-+  连续色 + 颜色 场景
+-   连续色 + 颜色 场景
 
 选择顺序型内置调色板
 
@@ -396,8 +398,7 @@ ggplot(data = iris,aes(x = Species,y = Sepal.Width,color = Sepal.Width))+
     scale_color_gradientn(colours = ctc_palette(type = "built_in",palette_name = 9))
 ```
 
-
-+  连续色 + 填充 场景
+-   连续色 + 填充 场景
 
 本例使用前文中定制的发散型调色板向量。
 
@@ -416,39 +417,37 @@ ggplot(df, aes(x, y, fill = z)) +
   theme_minimal()
 ```
 
-
-## 适配ggplot绘图：scales 标度系列函数及theme主题模版 
-
+## 适配ggplot绘图：scales 标度系列函数及theme主题模版
 
 ### 六组 scales 标度系列函数：
 
-+ scale_fill_ctc_d :离散色填充场景
+-   scale_fill_ctc_d :离散色填充场景
 
-+ scale_color_ctc_d：离散色颜色场景
+-   scale_color_ctc_d：离散色颜色场景
 
-+ scale_fill_ctc_c：连续色填充场景
+-   scale_fill_ctc_c：连续色填充场景
 
-+ scale_color_ctc_c：连续色颜色场景
+-   scale_color_ctc_c：连续色颜色场景
 
-+ scale_fill_ctc_m：定制色填充场景，只支持离散色场景
+-   scale_fill_ctc_m：定制色填充场景，只支持离散色场景
 
-+ scale_color_ctc_m：离散色颜色场景，只支持离散色场景
+-   scale_color_ctc_m：离散色颜色场景，只支持离散色场景
 
 前四个函数支持将内置调色板作为输入，与`ctc_palette()`一样，支持四种输入调色板信息来获取内置调色板；
 
 后两个支持将定制的调色板作为输入；可等价于ggplot包中`scale_fill(color)_m()`函数;同时支持color_pick list，可由create_color_pick()函数生成，也可手动生成，属于384种颜色的专属定制色输入通道。
 
-###  五组ggplot绘图的theme主题，基于中国传统文化元素制作，可供选用。
+### 五组ggplot绘图的theme主题，基于中国传统文化元素制作，可供选用。
 
-+ theme_ctc_paper： 宣纸主题
+-   theme_ctc_paper： 宣纸主题
 
-+ theme_ctc_dunhuang：敦煌主题
+-   theme_ctc_dunhuang：敦煌主题
 
-+ theme_ctc_bronze：青铜器主题
+-   theme_ctc_bronze：青铜器主题
 
-+ theme_ctc_mineral：大地主题
+-   theme_ctc_mineral：大地主题
 
-+ theme_ctc_ink：水墨山水画主题
+-   theme_ctc_ink：水墨山水画主题
 
 这些调色板更多算是一个试验品，对于基础绘图来讲，还是挺难驾驭的，后续会逐步扩展优化。这些主题中，建议慎用ink这个主题，比较难获得理想效果。相对其他四个主题目前来看，通用性和兼容性较强，对颜色要求不是很高。
 
@@ -478,7 +477,6 @@ ggplot(df, aes(x, y, fill = z)) +
  theme_ctc_mineral()
 ```
 
-
 ```{r}
 # Use palette_name_e value,a English name for palette
  ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
@@ -486,8 +484,6 @@ ggplot(df, aes(x, y, fill = z)) +
  scale_colour_ctc_c(palette_name = "violet_bloom", direction = -1)+
     theme_ctc_paper(base_family = "sans")
 ```
-
-
 
 ```{r}
  ggplot(faithfuld, aes(x = eruptions, y = waiting, fill = density)) +
@@ -528,11 +524,6 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
 
 ## Issues
 
-可以通过https://github.com/zhiming-chen/chinacolor/issues  提交问题，反馈bug.
+可以通过https://github.com/zhiming-chen/chinacolor/issues 提交问题，反馈bug.
 
 也欢迎大家贡献配色方案及改进优化意见.
-
-
-
-
-

@@ -5,7 +5,7 @@
 #' supporting dynamic color count and direction adjustments. Custom palettes allow color selection via groups, subgroups,
 #' or direct color IDs, with configurable sorting rules.
 #'
-#' @param type Palette type, either "built_in" (pre-defined palettes) or "custom" (user-defined selection). Defaults to one of these.
+#' @param type Palette type, default value is `built_in`.either "built_in" (pre-defined palettes) or "custom" (user-defined selection).
 #' @param palette_name  ONLY valid when type = "built_in".
 #' the input as below are available:
 #'  1. the name of palette(the element name for a palette in the palette_list),such as "seq01","div18",...;
@@ -111,7 +111,7 @@
 #' @importFrom grDevices colorRampPalette
 #' @importFrom utils data
 #' @export
-ctc_palette <- function(type = c("built_in", "custom"),
+ctc_palette <- function(type = "built_in",
                         palette_name = NULL,
                         n = NULL,
                         direction = 1,

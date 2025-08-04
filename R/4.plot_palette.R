@@ -10,7 +10,7 @@
 #'  4. the palette_name_e value in a palette, such as "violet_bloom",for English name;
 #' You can get the palette_name values and a quick preview the palettes by run `list_palettes()` function.
 #' for custom palette: a color vector or the name of a color vector.
-#' @param type Palette type, either "built_in" (pre-defined palettes) or "custom" (user-defined color vectors).
+#' @param type Palette type, default value is `built_in`  either "built_in" (pre-defined palettes) or "custom" (user-defined color vectors).
 #' @param name Display name for the palette. Defaults to NULL (uses original name for built-in palettes, vector name or "unnamed palette" for custom palettes).
 
 #' @param show_text A logical value ,default is `FALSE`.if `TRUE`,hex values and names of the color in the palette displayed.
@@ -59,7 +59,7 @@
 #' @importFrom rlist list.filter
 #' @export
 plot_palette <- function(x,
-                         type = c("built_in", "custom"),
+                         type = "built_in",
                          name = NULL,
                          show_text =FALSE, ...) {
     type <- match.arg(type)
