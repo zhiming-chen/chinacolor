@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# chinacolor
+# chinacolor :中国传统色
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -322,38 +322,404 @@ ctc为Chinese Traditional Colors 三个单词的首字母组合。他能实现�
 
 - 也支持从内置的384种颜色中，按id,group,subgroup以及他们的组合拾取颜色形成自定义调色板。因为原书作者对颜色的理解非常专业，该函数使用了颜色分组和子组的选择。(我用子组对这些颜色在其所在颜色分组里进行了简单的数字定义，在原书中，每个子组均有其内在含义的，这里不展开)
 
-#### 从内置调色板定制
+#### 从内置调色板提取、定制
 
-### create_color_pick 提取颜色高效工具，构建属于自己的调色板
+可通过调色板名称，颜色数量，颜色方向等参数来从内置调色板中定制属于自己的调色板。此时，color_pick
+参数是不生效的。
+
+- `palette_name` 参数:
+  可输入index(1-60)，elementname(seq01,div13,qual18等调色板在调色板list中的元素名),以及调色板的中英文名。这和`plot_palette`函数是一致的。
+
+- `n`颜色数量参数，可自定义颜色数量。默认值为调色板颜色数量。输入的数量大于或小于调色板颜色数量均可。
+
+  1.  输入的颜色数量`n`大于调色板颜色数量(强烈建议不出现此情形)：
+
+  - 对于顺序型调色板和发散型调色板，颜色会被等距计算并均匀分布成目标数量的颜色，但`show_colors`参数不能为`TRUE`(这应该是一个bug,后续升级时会进行优化)；
+  - 对于定性型调色板，调色板的颜色会被自动补位，亦即不会新增颜色。这种调色板用于实际场景是容易出现视觉效果异常甚至错误的。
+
+  2.  输入的颜色数量`n`小于调色板颜色数量(强烈建议不出现此情形)：
+
+  - 对于顺序型调色板和定性型调色板，颜色会按当前顺序，从`1`到`n`选择；
+  - 对于发散型调色板,颜色会从中间色依次向两端选择，直到`n`个颜色被选择。
+
+- `direction` 颜色方向参数：用来设置颜色方向，默认与调色板颜色方向一致。
+
+一些示例：
+
+``` r
+ctc_palette(type = "built_in",palette_name = 2,n = 5,direction = 1,show_colors = T)
+#> Colors in the palette:
+#> [1] "#F9D3E3" "#ECB0C1" "#F6BEC8" "#DD7694" "#B83570"
+#> Number of colors: 5
+```
+
+<img src="figures/README-unnamed-chunk-14-1.png" width="100%" />
+
+    #> [1] "#F9D3E3" "#ECB0C1" "#F6BEC8" "#DD7694" "#B83570"
+    ctc_palette(type = "built_in",palette_name = 2,direction = -1,show_colors = T)
+    #> Colors in the palette:
+    #> [1] "#903754" "#A73766" "#B83570" "#DD7694" "#F6BEC8" "#ECB0C1" "#F9D3E3"
+    #> Number of colors: 7
+
+<img src="figures/README-unnamed-chunk-14-2.png" width="100%" />
+
+    #> [1] "#903754" "#A73766" "#B83570" "#DD7694" "#F6BEC8" "#ECB0C1" "#F9D3E3"
+    ctc_palette(type = "built_in",palette_name = 2,n = 12) 
+    #>  [1] "#F9D3E3" "#F1BFD0" "#ECB1C1" "#F2B8C5" "#F1B0BE" "#E389A2" "#D2648A"
+    #>  [8] "#BE4076" "#B1356C" "#A83666" "#9C375D" "#903754"
+
+``` r
+ctc_palette(type = "built_in",palette_name = 22, n = 12,direction = 1,show_colors = F)
+#>  [1] "#D12920" "#DE0E17" "#E71712" "#E94D13" "#F0AB8D" "#F3F2F1" "#F0EFEF"
+#>  [8] "#CBE1E9" "#9BCDDD" "#6DB0BC" "#397B91" "#003460"
+ctc_palette(type = "built_in",palette_name = 22, n = 5,direction = 1,show_colors = T)
+#> Colors in the palette:
+#> [1] "#E60012" "#EA5514" "#F5F3F2" "#EFEFEF" "#A2D2E2"
+#> Number of colors: 5
+```
+
+<img src="figures/README-unnamed-chunk-15-1.png" width="100%" />
+
+    #> [1] "#E60012" "#EA5514" "#F5F3F2" "#EFEFEF" "#A2D2E2"
+    ctc_palette(type = "built_in",palette_name = 22, direction = 1,show_colors = T)
+    #> Colors in the palette:
+    #> [1] "#D12920" "#E60012" "#EA5514" "#F5F3F2" "#EFEFEF" "#A2D2E2" "#5AA4AE"
+    #> [8] "#003460"
+    #> Number of colors: 8
+
+<img src="figures/README-unnamed-chunk-15-2.png" width="100%" />
+
+    #> [1] "#D12920" "#E60012" "#EA5514" "#F5F3F2" "#EFEFEF" "#A2D2E2" "#5AA4AE"
+    #> [8] "#003460"
+
+``` r
+# 对于定性型调色板，颜色数量不宜超过调色板数量，如无合适内置调色板，可自行定制。
+ctc_palette(type = "built_in",palette_name = 44, n = 12,direction = 1,show_colors = T)
+#> Colors in the palette:
+#>  [1] "#C8161D" "#003460" "#B6A014" "#779649" "#A6559D" "#FEDC5E" "#94784F"
+#>  [8] "#6E9BC5" "#C8161D" "#003460" "#B6A014" "#779649"
+#> Number of colors: 12
+```
+
+<img src="figures/README-unnamed-chunk-16-1.png" width="100%" />
+
+    #>  [1] "#C8161D" "#003460" "#B6A014" "#779649" "#A6559D" "#FEDC5E" "#94784F"
+    #>  [8] "#6E9BC5" "#C8161D" "#003460" "#B6A014" "#779649"
+
+    ctc_palette(type = "built_in",palette_name = 44, n = 5,direction = 1,show_colors = T)
+    #> Colors in the palette:
+    #> [1] "#C8161D" "#003460" "#B6A014" "#779649" "#A6559D"
+    #> Number of colors: 5
+
+<img src="figures/README-unnamed-chunk-16-2.png" width="100%" />
+
+    #> [1] "#C8161D" "#003460" "#B6A014" "#779649" "#A6559D"
+    ctc_palette(type = "built_in",palette_name = 44, direction = 1,show_colors = T)
+    #> Colors in the palette:
+    #> [1] "#C8161D" "#003460" "#B6A014" "#779649" "#A6559D" "#FEDC5E" "#94784F"
+    #> [8] "#6E9BC5"
+    #> Number of colors: 8
+
+<img src="figures/README-unnamed-chunk-16-3.png" width="100%" />
+
+    #> [1] "#C8161D" "#003460" "#B6A014" "#779649" "#A6559D" "#FEDC5E" "#94784F"
+    #> [8] "#6E9BC5"
+
+#### 从内置颜色中选择颜色定制调色板
+
+很多时候，我们需要，或者希望定制自己的调色板，或者需要动态调整参数，抑或，内置的调色板不能满足实际需求，比如定性型调色板数量不够，这时候，自行定制是一个不错的选择。
+
+鉴于384种颜色以及其已设计好的分组及子组模式，我们能够非常方便的从中抓取颜色来形成自己的调色板，可能对于顺序型调色板会比较困难些，但对于生成定性型或者类发散性调色板，会是非常轻松的事情。
+
+此种模式下，`palette_name`调色板名称和`n`颜色数量两个以及`direction`颜色方向等参数失效。
+
+使用color_pick参数来选择颜色组别及子组序号和或颜色ID，也可以在这里输入颜色顺序要求等。
+
+当然更方便的是使用`create_color_pick`
+这个辅助函数，便捷的生成`抓色`list。
+
+这个函数实现了抓取颜色的高灵活性：
+
+这看起来会有点复杂，主要是我们支持了颜色分组与子组的灵活配置与选择，尤其是子组的选择方面。
+对于颜色组别(1-96)，只支持输入数值向量，比如group =
+c(4,8,12,16,20),定义了颜色从这5个组别里选择；
+subgroup可以非常灵活，比如：subgroup = 3，代表取上述5组颜色的第三个；sub
+=
+1:4,代表前四个组分别选择第1,2,3,4个颜色，第五组选择全部颜色(子组为空时默认全部)，当然也可以通过list来分别指定每个组抓取具体位置的颜色…
+
+- 定制一个9个颜色构成的发散型调色板
+
+``` r
+ 
+color_pick_1 <- create_color_pick(groups = c(11,13,12),
+                                  subgroups = list(4:1,1,1:4),
+                                  order_rule =1)
+ 
+Palette_C <- ctc_palette(type = "custom",
+            color_pick =color_pick_1,
+            show_colors = T,
+            palette_title = "金波碧浪")
+#> Colors in the palette:
+#> [1] "#C67915" "#DB9B34" "#FAC03D" "#FEDC5E" "#EBEEE8" "#9AA7B1" "#6B798E"
+#> [8] "#45465E" "#2C2F3B"
+#> Number of colors: 9
+```
+
+<img src="figures/README-unnamed-chunk-17-1.png" width="100%" />
+
+``` r
+Palette_C
+#> [1] "#C67915" "#DB9B34" "#FAC03D" "#FEDC5E" "#EBEEE8" "#9AA7B1" "#6B798E"
+#> [8] "#45465E" "#2C2F3B"
+```
+
+这个例子中，从第11组取其全部四种颜色，顺序反过来(subgroup
+顺序为4,3,2,1),从第12组中取其全部四种颜色，依次获取即可，再取第13组颜色中的第一个颜色，以此顺序即可获得上述调色板。这组颜色像是日落前，在邮轮甲板上日落方向的铺满金黄色，慢慢进展到身下的水面白色波浪翻滚，转过身去，背阳面向远处逐渐阴冷暗淡的那种调调…
+
+- 定制一个6个颜色构成的定性型调色板
+
+这会是非常easy的事情，前提是你对颜色比较熟悉，可以使用`list_colors()`在Viewer界面里即时浏览颜色。subgroup值与颜色的明度与和饱和度相关。通俗的讲，想要深一点的颜色，subgroup值可以选3,4,否则选1,2.如下示例中，我用一个非常简单的方法获得两组调色板。
+
+``` r
+color_pick_2 <- create_color_pick(groups = 10:15,
+                                  subgroups = 3,
+                                  order_rule =1)
+color_pick_3 <- create_color_pick(groups = 10:15,
+                                  subgroups = 4,
+                                  order_rule =-1)
+
+Palette_A <-  ctc_palette(type = "custom",
+            color_pick =color_pick_2,
+            show_colors = T,
+            palette_title = "Palette A")
+#> Colors in the palette:
+#> [1] "#DC6B82" "#DB9B34" "#45465E" "#E0E0D0" "#B26D5D" "#C8161D"
+#> Number of colors: 6
+```
+
+<img src="figures/README-unnamed-chunk-18-1.png" width="100%" />
+
+``` r
+Palette_B <- ctc_palette(type = "custom",
+            color_pick =color_pick_3,
+            show_colors = T,
+            palette_title = "Palette B")
+#> Colors in the palette:
+#> [1] "#A72126" "#9A6655" "#C7C6B6" "#2C2F3B" "#C67915" "#C35C5D"
+#> Number of colors: 6
+```
+
+<img src="figures/README-unnamed-chunk-18-2.png" width="100%" />
+
+``` r
+Palette_A 
+#> [1] "#DC6B82" "#DB9B34" "#45465E" "#E0E0D0" "#B26D5D" "#C8161D"
+Palette_B
+#> [1] "#A72126" "#9A6655" "#C7C6B6" "#2C2F3B" "#C67915" "#C35C5D"
+```
+
+当然，在color_pick里也可以直接输入颜色id,这是最常规的操作，示例从略。
+
+到目前为止，我们已熟悉内置颜色和调色板的打印与浏览，能够选择或提取内置的调色板，同时也实现了基于内置颜色的调色板定制。
+
+接下来就是一些简单的使用介绍示例。
 
 ### 在ggplot里使用调色板
 
-## scales 标度系列函数，适配ggplot绘图
+`ctc_palette`函数输出一组颜色hex值，这些输出可直接作为颜色的value用于ggplot绘图。
 
-## theme模版，源于中国传统文化
-
-``` r
-
-list_colors()
-```
+- 离散色 + 填充 场景
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
+    geom_violin()+
+    scale_fill_manual(values = ctc_palette(type = "built_in",palette_name = 48,n = 3))
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+<img src="figures/README-unnamed-chunk-19-1.png" width="100%" />
 
-You can also embed plots, for example:
+或者直接使用已生成的定制调色板向量
 
-<img src="figures/README-pressure-1.png" width="100%" />
+``` r
+ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
+    geom_violin()+
+    scale_fill_manual(values = Palette_A)
+```
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+<img src="figures/README-unnamed-chunk-20-1.png" width="100%" />
+
+- 离散色 + 颜色 场景
+
+选择内置定性型调色板
+
+``` r
+ggplot(data = iris,aes(x = Sepal.Length  ,y = Sepal.Width  ,color = Species))+
+    geom_point(size = 4)+
+    scale_color_manual(values = ctc_palette(type = "built_in",palette_name = 44,n = 3))
+```
+
+<img src="figures/README-unnamed-chunk-21-1.png" width="100%" />
+
+- 连续色 + 颜色 场景
+
+选择顺序型内置调色板
+
+``` r
+ggplot(data = iris,aes(x = Species,y = Sepal.Width,color = Sepal.Width))+
+    geom_point(size = 4)+
+    scale_color_gradientn(colours = ctc_palette(type = "built_in",palette_name = 9))
+```
+
+<img src="figures/README-unnamed-chunk-22-1.png" width="100%" />
+
+- 连续色 + 填充 场景
+
+本例使用前文中定制的发散型调色板向量。
+
+``` r
+ 
+df <- expand.grid(x = 1:20, y = 1:20)
+df$z <- (df$x - 10) * (df$y - 10)   
+
+ggplot(df, aes(x, y, fill = z)) +
+  geom_tile(color = "white", size = 0.3) +   
+  scale_fill_gradientn(
+    colours = rev(Palette_C), # 进行反转，冷色代表负值，暖色代表正值。
+    name = "Values",
+  ) +
+  labs(title = "Palette Test") +
+  theme_minimal()
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
+```
+
+<img src="figures/README-unnamed-chunk-23-1.png" width="100%" />
+
+## 适配ggplot绘图：scales 标度系列函数及theme主题模版
+
+### 六组 scales 标度系列函数：
+
+- scale_fill_ctc_d :离散色填充场景
+
+- scale_color_ctc_d：离散色颜色场景
+
+- scale_fill_ctc_c：连续色填充场景
+
+- scale_color_ctc_c：连续色颜色场景
+
+- scale_fill_ctc_m：定制色填充场景，只支持离散色场景
+
+- scale_color_ctc_m：离散色颜色场景，只支持离散色场景
+
+前四个函数支持将内置调色板作为输入，与`ctc_palette()`一样，支持四种输入调色板信息来获取内置调色板；
+
+后两个支持将定制的调色板作为输入；可等价于ggplot包中`scale_fill(color)_m()`函数;同时支持color_pick
+list，可由create_color_pick()函数生成，也可手动生成，属于384种颜色的专属定制色输入通道。
+
+### 五组ggplot绘图的theme主题，基于中国传统文化元素制作，可供选用。
+
+- theme_ctc_paper： 宣纸主题
+
+- theme_ctc_dunhuang：敦煌主题
+
+- theme_ctc_bronze：青铜器主题
+
+- theme_ctc_mineral：大地主题
+
+- theme_ctc_ink：水墨山水画主题
+
+这些调色板更多算是一个试验品，对于基础绘图来讲，还是挺难驾驭的，后续会逐步扩展优化。这些主题中，建议慎用ink这个主题，比较难获得理想效果。相对其他四个主题目前来看，通用性和兼容性较强，对颜色要求不时很高。
+
+上述函数与ggplot绘图在一个体系里，这里就不展开说明，直接列举一些示例供参考。
+
+``` r
+ iris$sepal_group <- cut(
+     iris$Sepal.Length,
+    breaks = 4,
+   labels = paste0("组", 1:4)
+ )
+ 
+ ggplot(iris, aes(x = Sepal.Width,
+                       y = Petal.Width,
+                       color = sepal_group)) +
+    geom_point(size = 2.5) +   
+   geom_smooth(method = "lm", se = FALSE) +   
+     scale_color_ctc_d(palette_name = 60)+   
+    theme_ctc_dunhuang() 
+#> `geom_smooth()` using formula = 'y ~ x'
+```
+
+<img src="figures/README-unnamed-chunk-24-1.png" width="100%" />
+
+``` r
+ ggplot(mpg, aes(x = class, fill = class)) +
+ geom_bar() +
+ scale_fill_ctc_d(palette_name = 41)+
+ theme_ctc_mineral()
+```
+
+<img src="figures/README-unnamed-chunk-25-1.png" width="100%" />
+
+``` r
+# Use palette_name_e value,a English name for palette
+ ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+ geom_point(size = 4) +
+ scale_colour_ctc_c(palette_name = "violet_bloom", direction = -1)+
+    theme_ctc_paper(base_family = "sans")
+```
+
+<img src="figures/README-unnamed-chunk-26-1.png" width="100%" />
+
+``` r
+ ggplot(faithfuld, aes(x = eruptions, y = waiting, fill = density)) +
+ geom_raster() +
+ scale_fill_ctc_c(palette_name = "海天沙影", direction = 1, name = "Density")+
+    theme_ctc_bronze(base_family = "sans")
+```
+
+<img src="figures/README-unnamed-chunk-27-1.png" width="100%" />
+
+``` r
+ ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
+ geom_point(shape = 21, size = 3) +
+ scale_fill_ctc_m(color_pick = color_pick_2) + ## 本例使用前文中已完成的pick_colorlist。
+theme_ctc_dunhuang(base_family = "sans")
+```
+
+<img src="figures/README-unnamed-chunk-28-1.png" width="100%" />
+
+``` r
+Pal_b <- Palette_B[3:5]
+ 
+ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
+ geom_point(shape = 21, size = 4,stroke = 0.8) +
+ scale_fill_ctc_m(palette = Pal_b) + ## 支持输入颜色向量，此时等同于scale_fill_manual 函数
+ theme_ctc_bronze(base_family = "sans",oxidation_level = "light")
+```
+
+<img src="figures/README-unnamed-chunk-29-1.png" width="100%" />
+
+``` r
+ # Step 1: Generate color_pick with specific color IDs and sorting
+  my_pick <- create_color_pick(
+   color_id = c(124, 324, 44),  # Directly select colors by ID
+  order_rule = -1            # Sort by ID descending
+  )
+ 
+ # Step 2: Use in ggplot with scale_colour_ctc_m
+ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+ geom_point(size = 4) +
+  scale_colour_ctc_m(color_pick = my_pick) + # Pass the generated color_pick
+ theme_ctc_mineral(base_family = "sans",base_size = 14)
+```
+
+<img src="figures/README-unnamed-chunk-30-1.png" width="100%" />
+
+## Issues
+
+可以通过https://github.com/zhiming-chen/chinacolor/issues提交问题，反馈bug.
+
+也欢迎大家贡献配色方案及改进优化意见.

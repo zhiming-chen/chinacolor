@@ -11,13 +11,19 @@ knitr::opts_chunk$set(
   fig.path = "figures/README-",
   out.width = "100%"
 )
+library(tidyverse)
+library(ggpubr)
 library(showtext)
 showtext_auto()
 font_add("simkai",regular = "C:\\Windows\\Fonts\\simkai.ttf")
+
+font_add("STKaiti",regular = "C:\\Windows\\Fonts\\simkai.ttf")
+font_add("KaiTi",regular = "C:\\Windows\\Fonts\\simkai.ttf")
+
 devtools::load_all()
 ```
 
-# chinacolor
+# chinacolor :中国传统色
 
 <!-- badges: start -->
 
@@ -304,11 +310,11 @@ color_pick_1 <- create_color_pick(groups = c(11,13,12),
                                   subgroups = list(4:1,1,1:4),
                                   order_rule =1)
  
-ctc_palette(type = "custom",
+Palette_C <- ctc_palette(type = "custom",
             color_pick =color_pick_1,
             show_colors = T,
             palette_title = "金波碧浪")
-
+Palette_C
 ```
 
 这个例子中，从第11组取其全部四种颜色，顺序反过来(subgroup 顺序为4,3,2,1),从第12组中取其全部四种颜色，依次获取即可，再取第13组颜色中的第一个颜色，以此顺序即可获得上述调色板。这组颜色像是日落前，在邮轮甲板上日落方向的铺满金黄色，慢慢进展到身下的水面白色波浪翻滚，转过身去，背阳面向远处逐渐阴冷暗淡的那种调调...
@@ -327,14 +333,16 @@ color_pick_3 <- create_color_pick(groups = 10:15,
                                   subgroups = 4,
                                   order_rule =-1)
 
-ctc_palette(type = "custom",
+Palette_A <-  ctc_palette(type = "custom",
             color_pick =color_pick_2,
             show_colors = T,
             palette_title = "Palette A")
-ctc_palette(type = "custom",
+Palette_B <- ctc_palette(type = "custom",
             color_pick =color_pick_3,
             show_colors = T,
             palette_title = "Palette B")
+Palette_A 
+Palette_B
 ```
 
 当然，在color_pick里也可以直接输入颜色id,这是最常规的操作，示例从略。
@@ -344,30 +352,185 @@ ctc_palette(type = "custom",
 
 接下来就是一些简单的使用介绍示例。
 
-
-
 ### 在ggplot里使用调色板
 
-## scales 标度系列函数，适配ggplot绘图
+`ctc_palette`函数输出一组颜色hex值，这些输出可直接作为颜色的value用于ggplot绘图。
 
-## theme模版，源于中国传统文化
++  离散色 + 填充 场景
 
-```{r eval=FALSE, include=TRUE}
+```{r}
+ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
+    geom_violin()+
+    scale_fill_manual(values = ctc_palette(type = "built_in",palette_name = 48,n = 3))
+```
 
-list_colors()
+或者直接使用已生成的定制调色板向量
+
+```{r}
+ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
+    geom_violin()+
+    scale_fill_manual(values = Palette_A)
+```
+
+
++  离散色 + 颜色 场景
+
+选择内置定性型调色板
+
+```{r}
+ggplot(data = iris,aes(x = Sepal.Length  ,y = Sepal.Width  ,color = Species))+
+    geom_point(size = 4)+
+    scale_color_manual(values = ctc_palette(type = "built_in",palette_name = 44,n = 3))
+```
+
+
++  连续色 + 颜色 场景
+
+选择顺序型内置调色板
+
+```{r}
+ggplot(data = iris,aes(x = Species,y = Sepal.Width,color = Sepal.Width))+
+    geom_point(size = 4)+
+    scale_color_gradientn(colours = ctc_palette(type = "built_in",palette_name = 9))
+```
+
+
++  连续色 + 填充 场景
+
+本例使用前文中定制的发散型调色板向量。
+
+```{r}
+ 
+df <- expand.grid(x = 1:20, y = 1:20)
+df$z <- (df$x - 10) * (df$y - 10)   
+
+ggplot(df, aes(x, y, fill = z)) +
+  geom_tile(color = "white", size = 0.3) +   
+  scale_fill_gradientn(
+    colours = rev(Palette_C), # 进行反转，冷色代表负值，暖色代表正值。
+    name = "Values",
+  ) +
+  labs(title = "Palette Test") +
+  theme_minimal()
+```
+
+
+## 适配ggplot绘图：scales 标度系列函数及theme主题模版 
+
+
+### 六组 scales 标度系列函数：
+
++ scale_fill_ctc_d :离散色填充场景
+
++ scale_color_ctc_d：离散色颜色场景
+
++ scale_fill_ctc_c：连续色填充场景
+
++ scale_color_ctc_c：连续色颜色场景
+
++ scale_fill_ctc_m：定制色填充场景，只支持离散色场景
+
++ scale_color_ctc_m：离散色颜色场景，只支持离散色场景
+
+前四个函数支持将内置调色板作为输入，与`ctc_palette()`一样，支持四种输入调色板信息来获取内置调色板；
+
+后两个支持将定制的调色板作为输入；可等价于ggplot包中`scale_fill(color)_m()`函数;同时支持color_pick list，可由create_color_pick()函数生成，也可手动生成，属于384种颜色的专属定制色输入通道。
+
+###  五组ggplot绘图的theme主题，基于中国传统文化元素制作，可供选用。
+
++ theme_ctc_paper： 宣纸主题
+
++ theme_ctc_dunhuang：敦煌主题
+
++ theme_ctc_bronze：青铜器主题
+
++ theme_ctc_mineral：大地主题
+
++ theme_ctc_ink：水墨山水画主题
+
+这些调色板更多算是一个试验品，对于基础绘图来讲，还是挺难驾驭的，后续会逐步扩展优化。这些主题中，建议慎用ink这个主题，比较难获得理想效果。相对其他四个主题目前来看，通用性和兼容性较强，对颜色要求不时很高。
+
+上述函数与ggplot绘图在一个体系里，这里就不展开说明，直接列举一些示例供参考。
+
+```{r}
+ iris$sepal_group <- cut(
+     iris$Sepal.Length,
+    breaks = 4,
+   labels = paste0("组", 1:4)
+ )
+ 
+ ggplot(iris, aes(x = Sepal.Width,
+                       y = Petal.Width,
+                       color = sepal_group)) +
+    geom_point(size = 2.5) +   
+   geom_smooth(method = "lm", se = FALSE) +   
+     scale_color_ctc_d(palette_name = 60)+   
+    theme_ctc_dunhuang() 
 
 ```
 
-```{r cars}
-summary(cars)
+```{r}
+ ggplot(mpg, aes(x = class, fill = class)) +
+ geom_bar() +
+ scale_fill_ctc_d(palette_name = 41)+
+ theme_ctc_mineral()
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r}
+# Use palette_name_e value,a English name for palette
+ ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
+ geom_point(size = 4) +
+ scale_colour_ctc_c(palette_name = "violet_bloom", direction = -1)+
+    theme_ctc_paper(base_family = "sans")
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+
+
+```{r}
+ ggplot(faithfuld, aes(x = eruptions, y = waiting, fill = density)) +
+ geom_raster() +
+ scale_fill_ctc_c(palette_name = "海天沙影", direction = 1, name = "Density")+
+    theme_ctc_bronze(base_family = "sans")
+```
+
+```{r}
+ ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
+ geom_point(shape = 21, size = 3) +
+ scale_fill_ctc_m(color_pick = color_pick_2) + ## 本例使用前文中已完成的pick_colorlist。
+theme_ctc_dunhuang(base_family = "sans")
+```
+
+```{r}
+Pal_b <- Palette_B[3:5]
+ 
+ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
+ geom_point(shape = 21, size = 4,stroke = 0.8) +
+ scale_fill_ctc_m(palette = Pal_b) + ## 支持输入颜色向量，此时等同于scale_fill_manual 函数
+ theme_ctc_bronze(base_family = "sans",oxidation_level = "light")
+```
+
+```{r}
+ # Step 1: Generate color_pick with specific color IDs and sorting
+  my_pick <- create_color_pick(
+   color_id = c(124, 324, 44),  # Directly select colors by ID
+  order_rule = -1            # Sort by ID descending
+  )
+ 
+ # Step 2: Use in ggplot with scale_colour_ctc_m
+ ggplot(mtcars, aes(mpg, wt, color = factor(cyl))) +
+ geom_point(size = 4) +
+  scale_colour_ctc_m(color_pick = my_pick) + # Pass the generated color_pick
+ theme_ctc_mineral(base_family = "sans",base_size = 14)
+```
+
+## Issues
+
+可以通过https://github.com/zhiming-chen/chinacolor/issues提交问题，反馈bug.
+
+也欢迎大家贡献配色方案及改进优化意见.
+
+
+
+
+
