@@ -1,0 +1,33 @@
+Package: chinacolor
+Title: Palettes and Themes Inspired by Chinese Traditional Colors 
+Version: 0.0.0.9000
+Authors@R: 
+    person("Zhiming", "Chen", , "zhimingc383@gmail.com", role = c("aut", "cre"))
+Description: A collection of 384 traditional Chinese colors, allowing 
+    customization of color palettes. Provides themes and scale functions 
+    for ggplot2, with 60 pre-defined palettes and 5 themes inspired by 
+    traditional Chinese culture.
+License: MIT + file LICENSE
+URL: https://github.com/zhiming-chen/chinacolor
+BugReports: https://github.com/zhiming-chen/chinacolor/issues
+Encoding: UTF-8
+Language: en-US, zh-CN
+Keywords: colors, ggplot2, palettes, visualization, chinese, traditional
+Roxygen: list(roclets = c("namespace", "rd"),markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    ggplot2,
+    DT,
+    dplyr,
+    grDevices,
+    graphics,
+    rlist,
+    utils
+Suggests:
+    testthat (>= 3.0.0),
+    vdiffr,
+    knitr,
+    rmarkdown,
+    tibble,
+    ggpubr
+VignetteBuilder: knitr

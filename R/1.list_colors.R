@@ -135,18 +135,18 @@ list_colors <- function() {
                     lengthMenu = "每页显示 _MENU_ 行"
                 )
             )
-        ) %>%
+        ) |>
             # Highlight group IDs with background color
             DT::formatStyle(
                 columns = "group_id",
                 backgroundColor = "#f5f5f5",
                 fontWeight = "bold"
-            ) %>%
+            ) |>
             # Adjust padding for color preview blocks
             DT::formatStyle(
                 columns = c(2,6,10,14),
                 padding = "1px"
-            ) %>%
+            ) |>
             # Style HEX columns for better readability
             DT::formatStyle(
                 columns = c(3,7,11,15),
