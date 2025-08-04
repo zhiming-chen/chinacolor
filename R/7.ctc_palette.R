@@ -122,10 +122,10 @@ ctc_palette <- function(type = "built_in",
 
     # 1. Strictly validate 'type' parameter
     valid_types <- c("built_in", "custom")
-    if (!type %in% valid_types) {
-        stop(paste("Invalid 'type' parameter. Must be one of:", paste(valid_types, collapse = ", ")))
-    }
-    type <- match.arg(type)
+    # if (!type %in% valid_types) {
+    #     stop(paste("Invalid 'type' parameter. Must be one of:", paste(valid_types, collapse = ", ")))
+    # }
+    type <- match.arg(type, choices = valid_types)
 
     # Parameter validation: Avoid cross-type parameters
     if (type == "built_in" && !is.null(color_pick) && length(color_pick) > 0) {

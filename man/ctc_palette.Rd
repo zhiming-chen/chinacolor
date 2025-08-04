@@ -5,7 +5,7 @@
 \title{Generate Built-in or Custom Color Palettes}
 \usage{
 ctc_palette(
-  type = c("built_in", "custom"),
+  type = "built_in",
   palette_name = NULL,
   n = NULL,
   direction = 1,
@@ -15,7 +15,7 @@ ctc_palette(
 )
 }
 \arguments{
-\item{type}{Palette type, either "built_in" (pre-defined palettes) or "custom" (user-defined selection). Defaults to one of these.}
+\item{type}{Palette type, default value is \code{built_in}.either "built_in" (pre-defined palettes) or "custom" (user-defined selection).}
 
 \item{palette_name}{ONLY valid when type = "built_in".
 the input as below are available:

@@ -62,7 +62,9 @@ plot_palette <- function(x,
                          type = "built_in",
                          name = NULL,
                          show_text =FALSE, ...) {
-    type <- match.arg(type)
+
+    type <-   match.arg(type, choices = c("built_in", "custom"))
+
 
     # --------------------------
     # 1. Built-in palette handling

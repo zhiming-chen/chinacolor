@@ -66,7 +66,8 @@ alt="384种颜色" />
 plot_color_grid(show_group = T)
 ```
 
-目前，尚无函数来支持打印按季节显示颜色的图形，不过，我们可以在[文化图片库](https://github.com/lisa/chinese-culture-project/tree/main/culture_images)。查看全部24个节气的颜色系列。这些图形中包含丰富的颜色信息，包括颜色id(这些id
+目前，尚无函数来支持打印按季节显示颜色的图形，不过，我们可以在[colors_by_solar_term](https://github.com/zhiming-chen/chinacolor/tree/master/image/color/colors_by_solar_term)
+中查看全部24个节气的颜色系列。这些图形中包含丰富的颜色信息，包括颜色id(这些id
 在本包中方便我们设计调色板时取色)，RGB值，CMYK值，当然，也有HEX值。每个颜色有一个中文名，对于熟悉中文或者对中文感兴趣的人，这也是一种不错的体验。
 
 ### list_colors 快速预览颜色
@@ -74,9 +75,9 @@ plot_color_grid(show_group = T)
 很多时候，我们需要即时、动态、快速预览并获得颜色，`list_colors`函数，我觉得是一个非常amazing的函数，能帮助我们在Rstudio
 中Viewer界面快速预览颜色，并即时获得颜色hex值，总之，我已经非常迷恋这个函数，甚至有点离不开他了。
 
-``` r
-list_colors()
-```
+![](figures/list_colors.png)
+
+`{list_colors()}`
 
 是的，你只需在console
 里键入`list_colors()`,在Viewer界面就能显示颜色，默认16行一页…
@@ -144,6 +145,8 @@ list_colors()
 
 list_palettes()
 ```
+
+![](figures/list_palettes.png)
 
 我们还可以通过这个函数将这些内置调色板信息导出。
 

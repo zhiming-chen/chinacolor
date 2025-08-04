@@ -4,13 +4,7 @@
 \alias{plot_palette}
 \title{Visualize Color Palettes}
 \usage{
-plot_palette(
-  x,
-  type = c("built_in", "custom"),
-  name = NULL,
-  show_text = FALSE,
-  ...
-)
+plot_palette(x, type = "built_in", name = NULL, show_text = FALSE, ...)
 }
 \arguments{
 \item{x}{For built-in palette, the input as below are available:
@@ -23,7 +17,7 @@ You can get the palette_name values and a quick preview the palettes by run \cod
 for custom palette: a color vector or the name of a color vector.
 }}
 
-\item{type}{Palette type, either "built_in" (pre-defined palettes) or "custom" (user-defined color vectors).}
+\item{type}{Palette type, default value is \code{built_in}  either "built_in" (pre-defined palettes) or "custom" (user-defined color vectors).}
 
 \item{name}{Display name for the palette. Defaults to NULL (uses original name for built-in palettes, vector name or "unnamed palette" for custom palettes).}
 
