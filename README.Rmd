@@ -15,10 +15,10 @@ library(tidyverse)
 library(ggpubr)
 library(showtext)
 showtext_auto()
-font_add("simkai",regular = "C:\\Windows\\Fonts\\simkai.ttf")
+font_add("simkai",regular = "C:\\Users\\czm\\AppData\\Local\\Microsoft\\Windows\\Fonts\\SourceHanSansSC-Regular.otf")
 
-font_add("STKaiti",regular = "C:\\Windows\\Fonts\\simkai.ttf")
-font_add("KaiTi",regular = "C:\\Windows\\Fonts\\simkai.ttf")
+font_add("STKaiti",regular = "C:\\Users\\czm\\AppData\\Local\\Microsoft\\Windows\\Fonts\\SourceHanSansSC-Regular.otf")
+font_add("KaiTi",regular = "C:\\Users\\czm\\AppData\\Local\\Microsoft\\Windows\\Fonts\\SourceHanSansSC-Regular.otf")
 
 devtools::load_all()
 ```

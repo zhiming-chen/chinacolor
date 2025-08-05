@@ -3,7 +3,7 @@
 #' A theme inspired by ancient Chinese bronze ware, featuring harmoniously optimized background colors.
 #'
 #' @param base_size Base font size (default: 12pt).
-#' @param base_family Font family (default: "STSong" for Chinese compatibility).
+#' @param base_family Font family.(default value is NotoSansSC,for broader compatibility. You can specify your preferred font.)
 #' @param grid_major Logical: whether to show major grid lines (default: TRUE).
 #' @param grid_minor Logical: whether to show minor grid lines (default: FALSE).
 #' @param oxidation_level Character: "light" (less greenish oxidation) or "heavy"
@@ -12,7 +12,6 @@
 #' @return A ggplot2 theme object.
 #'
 #' @details
-#'
 #' - **Background Settings**:
 #'   - Heavy oxidation mode: Reduces the color difference by 40% between plot background
 #'     (#DFD6B8) and panel background (#B4A379) for a more natural transition
@@ -21,7 +20,14 @@
 #'   - Recommended color combinations (selected from 384 colors): **For discrete categories**:
 #'     Bronze blue (#3D8E86), Secondary green (#5DA39D), Steamed chestnut (#A58A5F),
 #'     Bird plum (#788A6F)
+#' @seealso
+#' \code{\link{scale_color_ctc_d}},\code{\link{scale_fill_ctc_d}}
+#' \code{\link{scale_color_ctc_c}}, \code{\link{scale_fill_ctc_c}}
+#' \code{\link{scale_clor_ctc_m}}, \code{\link{scale_fill_ctc_m}}
+#' for color or fill scales that pair well with this theme.
 #'
+#' @importFrom ggplot2 theme_bw element_rect element_text element_line margin
+#' @import ggplot2
 #' @examples
 #' \dontrun{
 #' # Example 1: Heavy oxidation mode (optimized background transition)
@@ -50,11 +56,14 @@
 #' @export
 theme_ctc_bronze <- function(
         base_size = 12,
-        base_family = "STSong",
+        base_family = NULL,
         grid_major = TRUE,
         grid_minor = FALSE,
         oxidation_level = "heavy"
 ) {
+    if (is.null(base_family)) {
+        base_family <- setup_chinese_font()
+    }
     # Heavy oxidation mode: enforced high contrast
     if (oxidation_level == "heavy") {
         # Background colors: close but hierarchical (ΔE=7.2, soft transition)

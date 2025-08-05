@@ -6,7 +6,7 @@
 \usage{
 theme_ctc_mineral(
   base_size = 12,
-  base_family = "KaiTi",
+  base_family = NULL,
   grid_major = TRUE,
   grid_minor = FALSE
 )
@@ -14,7 +14,7 @@ theme_ctc_mineral(
 \arguments{
 \item{base_size}{Base font size (default: 12pt).}
 
-\item{base_family}{Font family (default: "KaiTi" — suited for Chinese calligraphic style).}
+\item{base_family}{Font family.(default value is NotoSansSC,for broader compatibility. You can specify your preferred font.)}
 
 \item{grid_major}{Logical: whether to show major grid lines (default: TRUE).}
 
@@ -81,4 +81,10 @@ ggplot(mpg \%>\% count(class, drv), aes(x = class, y = n, fill = drv)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 }
 
+}
+\seealso{
+\code{\link{scale_color_ctc_d}},\code{\link{scale_fill_ctc_d}}
+\code{\link{scale_color_ctc_c}}, \code{\link{scale_fill_ctc_c}}
+\code{\link{scale_clor_ctc_m}}, \code{\link{scale_fill_ctc_m}}
+for color or fill scales that pair well with this theme.
 }

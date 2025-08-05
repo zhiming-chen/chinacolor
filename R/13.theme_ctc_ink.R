@@ -4,7 +4,7 @@
 #' implemented using colors selected from the 384-color palette.
 #'
 #' @param base_size Base font size (default: 12pt).
-#' @param base_family Font family (default: "SimHei" for Chinese compatibility).
+#' @param base_family Font family.(default value is NotoSansSC,for broader compatibility. You can specify your preferred font.)
 #' @param grid_major Logical: whether to show major grid lines (default: TRUE).
 #' @param grid_minor Logical: whether to show minor grid lines (default: FALSE).
 #'
@@ -25,7 +25,13 @@
 #'   - Very light ink: "Shuang Di" (#C7C6B6) — pale grayish-beige for borders and captions;
 #'   - Wash layers: "Lv Yun" (#45493D) and "Ou Si Qiu Ban" (#D3CBC5) — muted greens/browns for grid lines,
 #'     simulating diluted ink washes.
-#'
+#'#' @seealso
+#' \code{\link{scale_color_ctc_d}},\code{\link{scale_fill_ctc_d}}
+#' \code{\link{scale_color_ctc_c}}, \code{\link{scale_fill_ctc_c}}
+#' \code{\link{scale_clor_ctc_m}}, \code{\link{scale_fill_ctc_m}}
+#' for color or fill scales that pair well with this theme.
+#' @importFrom ggplot2 theme_bw element_rect element_text element_line margin
+#' @import ggplot2
 #' @examples
 #' \dontrun{
 #' # Example 1: Color scatter plot
@@ -73,10 +79,14 @@
 #' @export
 theme_ctc_ink <- function(
         base_size = 12,
-        base_family = "SimHei",
+        base_family = NULL,
         grid_major = TRUE,
         grid_minor = FALSE
 ) {
+    if (is.null(base_family)) {
+        base_family <- setup_chinese_font()
+    }
+
     theme_bw(base_size = base_size, base_family = base_family) %+replace%
 
         theme(

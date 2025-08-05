@@ -1,13 +1,13 @@
-#' CTC Paper Theme for ggplot2
-#'
+#'CTC Paper Theme for ggplot2
+
 #' A theme inspired by traditional Chinese rice paper, with improved color harmony.
 #'
 #' @param base_size Base font size (default: 12pt).
-#' @param base_family Font family (default: "SimSun" for Chinese compatibility).
+#' @param base_family Font family.(default value is NotoSansSC,for broader compatibility. You can specify your preferred font.)
 #' @param grid_major Logical: whether to show major grid lines (default: TRUE).
 #' @param grid_minor Logical: whether to show minor grid lines (default: FALSE).
 #'
-#' @return A ggplot2 theme object.
+#' @return A ggplot2 theme object that can be added to ggplot objects.
 #'
 #' @details
 #' Recommended color combinations (carefully selected from 384 colors):
@@ -16,14 +16,26 @@
 #'   - Warm-toned gradient: Huang Bai You (#FFF799) → Xiang Ye (#ECD452) → Cang Huang (#B6A014) → Li Ke (#775039)
 #'   - Cool-toned gradient: Tian Piao (#D5EBE1) → Cang Lang (#B1D5C8) → Piao Bi (#80A492) → Qing Li (#422517)
 #'
+#' The color names in comments (e.g., 凝脂, 玉色) are traditional Chinese color terms, preserving cultural connotations.
+#'
+#' @seealso
+#' \code{\link{scale_color_ctc_d}},\code{\link{scale_fill_ctc_d}}
+#' \code{\link{scale_color_ctc_c}}, \code{\link{scale_fill_ctc_c}}
+#' \code{\link{scale_clor_ctc_m}}, \code{\link{scale_fill_ctc_m}}
+#' for color or fill scales that pair well with this theme.
+#'
+#' @importFrom ggplot2 theme_bw element_rect element_text element_line margin
+#' @import ggplot2
+#'
 #' @examples
 #' \dontrun{
 # Example 1: Scatter plot with discrete colors
 #' showtext::showtext_auto()
+#' font_add("zkt","C:\\Users\\czm\\AppData\\Local\\Microsoft\\Windows\\Fonts\\字酷堂清楷体.ttf")
 #' ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
 #'     geom_point(size = 3) +
 #'     scale_color_ctc_d(palette_name = 52,name = "品种图例")+
-#'     theme_ctc_paper(base_family = "STSong") +
+#'     theme_ctc_paper(base_family = "zkt") +
 #'     labs(
 #'         title = "鸢尾花数据可视化",
 #'         subtitle = "基于萼片尺寸的分类",
@@ -47,13 +59,17 @@
 #'     coord_flip()
 #' }
 #'
+#' @note For optimal Chinese display, it is recommended to use the \code{showtext} package to manage fonts, as demonstrated in the examples.
 #' @export
 theme_ctc_paper <- function(
         base_size = 12,
-        base_family = "SimSun",
+        base_family = NULL,
         grid_major = TRUE,
         grid_minor = FALSE
 ) {
+    if (is.null(base_family)) {
+        base_family <- setup_chinese_font()
+    }
     theme_bw(base_size = base_size, base_family = base_family) %+replace%
 
         theme(

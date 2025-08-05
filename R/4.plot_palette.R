@@ -157,7 +157,7 @@ plot_palette <- function(x,
 
     old_par <- par(mar = c(0.5, 0.5, 0.5, 0.5))
     on.exit(par(old_par))
-
+    base_family <- setup_chinese_font()
     image(
         x = x_coords,
         y = y_coords,
@@ -170,31 +170,25 @@ plot_palette <- function(x,
     # Add title
     rect(xleft = 0, ybottom = 0.9, xright = n + 1, ytop = 1.1,
          col = rgb(1, 1, 1, 0.8), border = NA)
-    text(x = (n + 1) / 2, y = 1, labels = palette_title, cex = 2.5, family = "simkai")
+    text(x = (n + 1) / 2, y = 1, labels = palette_title, cex = 2.5,family = base_family )
     if (type == "built_in"&& is.null(name)){
-    text(x = (n + 1.4) / 2, y = 0.93, labels = element_name, cex = 1, family = "simkai")
-    text(x = (n + 0.6) / 2, y = 0.93, labels = index_value, cex = 1, family = "simkai")
+    text(x = (n + 1.4) / 2, y = 0.93, labels = element_name, cex = 1,family = base_family )
+    text(x = (n + 0.6) / 2, y = 0.93, labels = index_value, cex = 1 ,family = base_family)
     }
     if(show_text){
         text(x = 1:n,
              y = 0.62,
              labels = colors,
              cex = 1,
-             family = "simkai",
+             family = base_family,
              col = text_colors)
-        # if (type == "built_in"){ text(x = 1:n,
-        #                               y = 0.64,
-        #                               labels = color_names,
-        #                               cex = 1,
-        #                               font = 2,
-        #                               family = "KaiTi",
-        #                               col = text_colors)
+
             if (!is.null(color_names)){ text(x = 1:n,
-                                          y = 0.64,
+                                          y = 0.65,
                                           labels = color_names,
                                           cex = 1,
                                           font = 2,
-                                          family = "simkai",
+                                          family = base_family,
                                           col = text_colors)
         }
     }

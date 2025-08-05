@@ -6,7 +6,7 @@
 \usage{
 theme_ctc_ink(
   base_size = 12,
-  base_family = "SimHei",
+  base_family = NULL,
   grid_major = TRUE,
   grid_minor = FALSE
 )
@@ -14,7 +14,7 @@ theme_ctc_ink(
 \arguments{
 \item{base_size}{Base font size (default: 12pt).}
 
-\item{base_family}{Font family (default: "SimHei" for Chinese compatibility).}
+\item{base_family}{Font family.(default value is NotoSansSC,for broader compatibility. You can specify your preferred font.)}
 
 \item{grid_major}{Logical: whether to show major grid lines (default: TRUE).}
 
@@ -44,6 +44,11 @@ where five gradations of ink (from pale to dense) create depth and texture. Key 
 \item Very light ink: "Shuang Di" (#C7C6B6) — pale grayish-beige for borders and captions;
 \item Wash layers: "Lv Yun" (#45493D) and "Ou Si Qiu Ban" (#D3CBC5) — muted greens/browns for grid lines,
 simulating diluted ink washes.
+#' @seealso
+\code{\link{scale_color_ctc_d}},\code{\link{scale_fill_ctc_d}}
+\code{\link{scale_color_ctc_c}}, \code{\link{scale_fill_ctc_c}}
+\code{\link{scale_clor_ctc_m}}, \code{\link{scale_fill_ctc_m}}
+for color or fill scales that pair well with this theme.
 }
 }
 }

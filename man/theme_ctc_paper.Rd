@@ -2,11 +2,12 @@
 % Please edit documentation in R/15.theme_ctc_paper.R
 \name{theme_ctc_paper}
 \alias{theme_ctc_paper}
-\title{CTC Paper Theme for ggplot2}
+\title{CTC Paper Theme for ggplot2
+A theme inspired by traditional Chinese rice paper, with improved color harmony.}
 \usage{
 theme_ctc_paper(
   base_size = 12,
-  base_family = "SimSun",
+  base_family = NULL,
   grid_major = TRUE,
   grid_minor = FALSE
 )
@@ -14,16 +15,17 @@ theme_ctc_paper(
 \arguments{
 \item{base_size}{Base font size (default: 12pt).}
 
-\item{base_family}{Font family (default: "SimSun" for Chinese compatibility).}
+\item{base_family}{Font family.(default value is NotoSansSC,for broader compatibility. You can specify your preferred font.)}
 
 \item{grid_major}{Logical: whether to show major grid lines (default: TRUE).}
 
 \item{grid_minor}{Logical: whether to show minor grid lines (default: FALSE).}
 }
 \value{
-A ggplot2 theme object.
+A ggplot2 theme object that can be added to ggplot objects.
 }
 \description{
+CTC Paper Theme for ggplot2
 A theme inspired by traditional Chinese rice paper, with improved color harmony.
 }
 \details{
@@ -36,14 +38,20 @@ Recommended color combinations (carefully selected from 384 colors):
 \item Cool-toned gradient: Tian Piao (#D5EBE1) → Cang Lang (#B1D5C8) → Piao Bi (#80A492) → Qing Li (#422517)
 }
 }
+
+The color names in comments (e.g., 凝脂, 玉色) are traditional Chinese color terms, preserving cultural connotations.
+}
+\note{
+For optimal Chinese display, it is recommended to use the \code{showtext} package to manage fonts, as demonstrated in the examples.
 }
 \examples{
 \dontrun{
 showtext::showtext_auto()
+font_add("zkt","C:\\\\Users\\\\czm\\\\AppData\\\\Local\\\\Microsoft\\\\Windows\\\\Fonts\\\\字酷堂清楷体.ttf")
 ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
     geom_point(size = 3) +
     scale_color_ctc_d(palette_name = 52,name = "品种图例")+
-    theme_ctc_paper(base_family = "STSong") +
+    theme_ctc_paper(base_family = "zkt") +
     labs(
         title = "鸢尾花数据可视化",
         subtitle = "基于萼片尺寸的分类",
@@ -67,4 +75,10 @@ theme_ctc_paper(grid_major = FALSE) +
     coord_flip()
 }
 
+}
+\seealso{
+\code{\link{scale_color_ctc_d}},\code{\link{scale_fill_ctc_d}}
+\code{\link{scale_color_ctc_c}}, \code{\link{scale_fill_ctc_c}}
+\code{\link{scale_clor_ctc_m}}, \code{\link{scale_fill_ctc_m}}
+for color or fill scales that pair well with this theme.
 }

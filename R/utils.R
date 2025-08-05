@@ -310,3 +310,46 @@ hsl_to_hex <- function(hsl) {
     rgb(rgb_final[1], rgb_final[2], rgb_final[3])
 }
 
+
+#' Internal function: Initialize Chinese fonts
+#' @importFrom showtext showtext_auto
+#' @importFrom sysfonts font_add
+setup_chinese_font <- function() {
+    # Check if showtext is installed (prompt if not)
+    if (!requireNamespace("showtext", quietly = TRUE)) {
+        stop("Please install the showtext package first: install.packages('showtext')",
+             call. = FALSE)
+    }
+
+    # Enable showtext automatic rendering (ensure graphics devices support Chinese)
+    showtext::showtext_auto()
+
+    # 1. Prioritize loading embedded SourceHanSansSC-Regular from the package
+    font_path <- system.file("fonts", "NotoSansSC-VariableFont_wght.ttf", package = "chinacolor")
+
+    if (font_path == "") {
+        # If package font is missing (extreme case), prompt user to reinstall
+        warning("Embedded font file not found. Please reinstall the package: devtools::install_github('zhiming-chen/chinacolor')",
+                call. = FALSE)
+        # Fallback to system default font
+        font_family <- get_system_default_font()
+    } else {
+        # Load package font, named "chinese_font"
+        sysfonts::font_add(family = "base_font", regular = font_path)
+        font_family <- "base_font"
+    }
+
+    return(font_family)
+}
+
+#' Internal function: Get system default Chinese font (fallback solution)
+get_system_default_font <- function() {
+    sys <- Sys.info()["sysname"]
+    if (sys == "Windows") {
+        "SimHei"  # Windows default bold font
+    } else if (sys == "Darwin") {  # macOS
+        "PingFang SC"  # macOS default PingFang SC
+    } else {  # Linux
+        "WenQuanYi Micro Hei"  # Linux default WenQuanYi Micro Hei
+    }
+}

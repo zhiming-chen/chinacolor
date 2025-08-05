@@ -5,7 +5,7 @@
 #' selected from your 384-color list to maintain cultural authenticity.
 #'
 #' @param base_size Base font size (default: 12pt). Recommended for murals: 14pt for better readability.
-#' @param base_family Font family (default: "STKaiti" — imitates the style of Dunhuang silk manuscripts).
+#' @param base_family Font family.(default value is NotoSansSC,for broader compatibility. You can specify your preferred font.)
 #' @param grid_major Logical: whether to show major grid lines (default: TRUE, mimicking the grid of mural layouts).
 #' @param grid_minor Logical: whether to show minor grid lines (default: FALSE).
 #' @param border_style Character: "simple" (thin border) or "ornate" (thick border, imitating mural frames, default: "ornate").
@@ -23,6 +23,14 @@
 #'   - Azurite series: Qunqing (#2E59A7), Dishiqing (#003460) — imitating lapis lazuli color
 #' - **Text color**: Huaqing (#1A2847) — high contrast with earth-yellow background, imitating mural inscriptions
 #'
+#' @seealso
+#' \code{\link{scale_color_ctc_d}},\code{\link{scale_fill_ctc_d}}
+#' \code{\link{scale_color_ctc_c}}, \code{\link{scale_fill_ctc_c}}
+#' \code{\link{scale_clor_ctc_m}}, \code{\link{scale_fill_ctc_m}}
+#' for color or fill scales that pair well with this theme.
+#'
+#' @importFrom ggplot2 theme_bw element_rect element_text element_line margin
+#' @import ggplot2
 #' @examples
 #' \dontrun{
 #' # Example 1: Scatter plot mimicking Dunhuang mural figures
@@ -64,11 +72,16 @@
 #' @export
 theme_ctc_dunhuang <- function(
         base_size = 12,
-        base_family = "STKaiti",
+        base_family = NULL,
         grid_major = TRUE,
         grid_minor = FALSE,
         border_style = "ornate"
 ) {
+
+        if (is.null(base_family)) {
+            base_family <- setup_chinese_font()
+        }
+
     # Adjust border width by style (imitating mural border thickness)
     border_width <- ifelse(border_style == "ornate", 0.6, 0.3)
 

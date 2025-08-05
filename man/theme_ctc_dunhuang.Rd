@@ -6,7 +6,7 @@
 \usage{
 theme_ctc_dunhuang(
   base_size = 12,
-  base_family = "STKaiti",
+  base_family = NULL,
   grid_major = TRUE,
   grid_minor = FALSE,
   border_style = "ornate"
@@ -15,7 +15,7 @@ theme_ctc_dunhuang(
 \arguments{
 \item{base_size}{Base font size (default: 12pt). Recommended for murals: 14pt for better readability.}
 
-\item{base_family}{Font family (default: "STKaiti" — imitates the style of Dunhuang silk manuscripts).}
+\item{base_family}{Font family.(default value is NotoSansSC,for broader compatibility. You can specify your preferred font.)}
 
 \item{grid_major}{Logical: whether to show major grid lines (default: TRUE, mimicking the grid of mural layouts).}
 
@@ -86,4 +86,10 @@ diamonds \%>\%
   ) +
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
 }
+}
+\seealso{
+\code{\link{scale_color_ctc_d}},\code{\link{scale_fill_ctc_d}}
+\code{\link{scale_color_ctc_c}}, \code{\link{scale_fill_ctc_c}}
+\code{\link{scale_clor_ctc_m}}, \code{\link{scale_fill_ctc_m}}
+for color or fill scales that pair well with this theme.
 }
