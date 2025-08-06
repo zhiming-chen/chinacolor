@@ -512,7 +512,7 @@ ggplot(df, aes(x, y, fill = z)) +
 
 <img src="figures/README-unnamed-chunk-23-1.png" width="100%" />
 
-## Plot in ggplot :Scale Functions and Ttheme Templates
+## Plot in ggplot :Scale Functions and Theme Templates
 
 ### Scale Function
 
@@ -638,6 +638,6 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
 Issues report：<https://github.com/zhiming-chen/chinacolor/issues>.
 
 Palettes contribution and suggestions for improvement and optimization
-is welcome!!
+are welcome!!
 
 Gmail: <zhimingc383@gmail.com>
