@@ -11,8 +11,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Inspired by the Chinese book Traditional Chinese Colors: The Aesthetics
-of Colors in the Forbidden City[Chinese Traditional Colors: The
+Inspired by the Chinese book[Chinese Traditional Colors: The
 Aesthetics of Colors in the Forbidden
 City](https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E8%89%B2%EF%BC%9A%E6%95%85%E5%AE%AB%E9%87%8C%E7%9A%84%E8%89%B2%E5%BD%A9%E7%BE%8E%E5%AD%A6/56817070),
 this package was developed. The key information of 384 colors from this
