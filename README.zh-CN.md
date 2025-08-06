@@ -34,7 +34,7 @@ aria-hidden="true">带颜色分组编码的全部384种颜色</figcaption>
 
 <figure>
 <img
-src="image/color/colors_by_solar_term/5_清明%20Pure%20Brightness.png"
+src=" https://github.com/zhiming-chen/chinacolor/blob/master/image/color/colors_by_solar_term/5_%E6%B8%85%E6%98%8E%20%20Pure%20Brightness.png"
 alt="按节气分组的颜色" />
 <figcaption aria-hidden="true">按节气分组的颜色</figcaption>
 </figure>
