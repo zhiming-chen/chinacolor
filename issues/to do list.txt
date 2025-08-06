@@ -1,4 +1,0 @@
-1.字体检查与统一 done!
-2.imports 全面检查 查漏补缺 --pending
-3.corner test 尤其是颜色计算部分函数 pending
-4.default设置，减少录入工作量 --plot_palette done,ctc_palette done!

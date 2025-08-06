@@ -1,81 +1,119 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# chinacolor :中国传统色
+| 语言 / Language | 版本 |
+|-----------------|------|
+| 🇺🇸 English      | [README.md](README.md) |
+| 🇨🇳 中文         | [README.zh-CN.md](README.zh-CN.md) |
+
+# chinacolor :Chinese Traditional Colors
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-受中文书籍[《中国传统色：故宫里的色彩美学》](https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E8%89%B2%EF%BC%9A%E6%95%85%E5%AE%AB%E9%87%8C%E7%9A%84%E8%89%B2%E5%BD%A9%E7%BE%8E%E5%AD%A6/56817070)的启发制作本包，将该书中384种颜色关键信息整理成颜色数据信息，基于这些数据：
+Inspired by the Chinese book Traditional Chinese Colors: The Aesthetics
+of Colors in the Forbidden City[Chinese Traditional Colors: The
+Aesthetics of Colors in the Forbidden
+City](https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E4%BC%A0%E7%BB%9F%E8%89%B2%EF%BC%9A%E6%95%85%E5%AE%AB%E9%87%8C%E7%9A%84%E8%89%B2%E5%BD%A9%E7%BE%8E%E5%AD%A6/56817070),
+this package was developed. The key information of 384 colors from this
+book has been compiled into color data, and based on this data:
 
-- 内置了顺序型、发散性和定性型调色板各20个；
+- Built-in 20 Sequential, 20 Diverging, and 20 Qualitative color
+  palettes respectively;
 
-- 内置了5款基于中国传统文化特色的适配ggplot的绘图主题；
+- Built-in 5 ggplot-compatible plotting themes featuring traditional
+  Chinese cultural characteristics;
 
-- 形成了浏览、打印这些颜色和调色板的函数，快速获取颜色和调色板信息；
+- Developed functions for browsing and printing these colors and color
+  palettes, allowing quick access to information about colors and color
+  palettes;
 
-- 形成了利用这些颜色或内置调色板定制调色板的工具；
+- Developed tools for customizing color palettes using these colors or
+  built-in color palettes
 
-- 形成了适配ggplot绘图的scales系列函数。
+- Developed a series of scales functions compatible with ggplot
+  plotting.
 
-## <img src="image/color/all_cirle.png" width="708" alt="颜色图形" />
+- 384 colors fill in circle ordered by HUE with id
+
+<figure>
+<img src="image/color/all_cirle.png" width="708"
+alt="384 colors in circle with id" />
+<figcaption aria-hidden="true">384 colors in circle with id</figcaption>
+</figure>
+
+- 384 in grid ordered by id with group id
 
 <figure>
 <img src="image/color/All_Colors_with%20_Group_ID.png"
-alt="带颜色分组编码的全部384种颜色" />
-<figcaption
-aria-hidden="true">带颜色分组编码的全部384种颜色</figcaption>
+alt="384 colors with group id" />
+<figcaption aria-hidden="true">384 colors with group id</figcaption>
 </figure>
+
+- colors for solar term, 24 solar term in a year,16 colors for a solar
+  term, each color has its means.
 
 <figure>
-<img
-src="image/color/colors_by_solar_term/5_清明%20Pure%20Brightness.png"
-alt="按节气分组的颜色" />
-<figcaption aria-hidden="true">按节气分组的颜色</figcaption>
+<img src="image/color/colors_by_solar_term/6_谷雨%20Grain%20Rain.png"
+alt="colors for solar terms" />
+<figcaption aria-hidden="true">colors for solar terms</figcaption>
 </figure>
+
+- palette with color from 384 colors
 
 <figure>
-<img src="image/palettes/palette_5.png" alt="调色板示例" />
-<figcaption aria-hidden="true">调色板示例</figcaption>
+<img src="image/palettes/palette_5.png" alt="a palette example" />
+<figcaption aria-hidden="true">a palette example</figcaption>
 </figure>
 
-## 安装
+## Installation
 
-用如下方法安装本包开发版。
+You can install the package by using the following methods.
 
 ``` r
- # 用 devtools 安装
+ 
 devtools::install_github("zhiming-chen/chinacolor")
 
-# 或用 remotes 安装（语法相同）
+# or
 remotes::install_github("zhiming-chen/chinacolor")
 ```
 
-## 颜色:打印、预览与获取
+## Plot,Preview and Get the Colors
 
-### plot_color_grid 打印全部颜色
+### plot_color_grid print colors
 
 ``` r
 plot_color_grid(show_group = T)
 ```
 
-可以在[colors_by_solar_term](https://github.com/zhiming-chen/chinacolor/tree/master/image/color/colors_by_solar_term)
-中查看全部24个节气的颜色系列。
+可以在中查看全部24个节气的颜色系列。
 
-### list_colors 快速预览颜色
+all the colors for 24 solar terms can found in the folder
+:[colors_by_solar_term](https://github.com/zhiming-chen/chinacolor/tree/master/image/color/colors_by_solar_term)
 
-`list_colors`函数实现在Rstudio
-中Viewer界面快速预览颜色，并即时获得颜色hex值，这个功能在我们设计调色板，或者绘图时调整颜色时提供帮助。
+### list_colors Preview the colors in Viewer Panel
+
+The `list_colors` function enables quick preview of colors in the Viewer
+interface of RStudio and allows instant access to color hex values. This
+feature is helpful when we design color palettes or adjust colors during
+plotting.
 
 ``` r
 list_colors()
 ```
 
-![](figures/list_colors.png)
+<figure>
+<img src="figures/list_colors.png"
+alt="screen_shot for the preview result" />
+<figcaption aria-hidden="true">screen_shot for the preview
+result</figcaption>
+</figure>
 
-## 调色板：打印、预览、获取与定制
+## Palettes:Plot,Preview,Get and Customize
 
-60组调色板被预置于本包中供调用。几个调色板示例：
+60 color palettes are pre-installed in this package for use. Here are
+some examples of the palettes:
+
 ![](image/palettes/palette_3.png)
 
 ![](image/palettes/palette_12.png)
@@ -94,33 +132,39 @@ list_colors()
 
 ![](image/palettes/palette_59.png)
 
-内置的调色板被定义为三种类型，顺序型，发散型和定性型。每种20个。
+The built-in color palettes are categorized into three types:
+sequential, diverging, and qualitative, with 20 palettes for each type.
 
-这些调色板被id化以及规则命名化：
+These color palettes are assigned IDs and named in a regularized way:
 
-- 顺序型调色板：
+- sequential palettes：
 
   - id：1-20
 
-  - 命名：seq01-seq20。
+  - name：seq01-seq20。
 
-- 发散型调色板：
+- diverging palettes：
 
   - id：21-40
 
-  - 命名：div01-div20。
+  - name：div01-div20。
 
-- 定性型调色板：
+- qualitative palettes：
 
   - id：41-60
 
-  - 命名：qual01-qual20。
+  - name：qual01-qual20。
 
-当然，每个调色板也有其中文名称与英文名称，通过输入对应名称，可获取单个调色板信息。
+these names are the element names for palette in the palette_list.
 
-### list_palettes 预览调色板
+And，for each palette, an embedded list in the palette_list, has its
+Chinese name and English,so we can get the palette information by put in
+the id number(index),element name,Chinese name and English name for
+palette.
 
-和预览颜色一样，调色板也可以在Viewer界面进行预览。
+### list_palettes Preview the palettes
+
+The same method as `list_colors` function.
 
 ``` r
 
@@ -129,7 +173,7 @@ list_palettes()
 
 ![](figures/list_palettes.png)
 
-我们还可以通过这个函数将这些内置调色板信息导出。
+You can also get the palettes main info by run this function.
 
 ``` r
 palettes_info <- list_palettes()
@@ -148,13 +192,13 @@ head(palettes_info,10)
 #> seq10    10       seq10    琥珀流光     amber_glow sequential      7
 ```
 
-### plot_palettes 打印多个调色板
+### plot_palettes: Plot Multipule Palettes
 
-`plot_palettes`
-函数支持将多个调色板打印在一张图上，实现调色板的比较和选择。支持index和元素名称输入。
+Function `plot_palettes` can help us plot multiple palettes in a picture
+for compare and selection.
 
 ``` r
-# 通过index值打印
+#  input the number vector for palettes id or index 
 plot_palettes(1:5)
 ```
 
@@ -162,29 +206,29 @@ plot_palettes(1:5)
 
 ``` r
 
-# 通过元素名称打印
+# input the element name for palettes
 plot_palettes(c("seq01","div02","qual14","qual18"))
 ```
 
 <img src="figures/README-unnamed-chunk-7-2.png" width="100%" />
 
-### plot_palette 打印单个调色板
+### plot_palette: Plot a Single Palette
 
-这个函数打印内置的调色板，也支持打印自定义的调色板。默认模式为内置调色板。
+Function `plot_palette`works for plot either built_in palettes or custom
+palettes,you can set the parameters to match you requirement to the
+plot.
 
-当打印内置调色板时，支持index，元素名称，及调色板的中英文名称作为输入。
-
-- 打印内置调色板
+- plot built_in palettes
 
 ``` r
-# 根据index打印
+# input index number in an easy way, show_text default value is FALSE.
 plot_palette(x = 43,show_text = T)
 ```
 
 <img src="figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 ``` r
-# 根据元素名称打印，并对调色板进行重命名
+# input the element name,and can also named the palette title/name by your owner words
 
 plot_palette(x = "div13",name = "ONLY FOR PROJECT A!!!")
 ```
@@ -192,7 +236,7 @@ plot_palette(x = "div13",name = "ONLY FOR PROJECT A!!!")
 <img src="figures/README-unnamed-chunk-9-1.png" width="100%" />
 
 ``` r
-# 根据调色板英文名打印，显示颜色信息
+# English name of the palette also can work as an input, 
 
 plot_palette(x = "scarlet_flow",show_text = T)
 ```
@@ -201,22 +245,21 @@ plot_palette(x = "scarlet_flow",show_text = T)
 
 ``` r
 
-# 根据调色板中文名打印，显示颜色信息
+# Chinese name is available as expected.
 plot_palette(x = "绯绿相生",show_text = T)
 ```
 
 <img src="figures/README-unnamed-chunk-11-1.png" width="100%" />
 
-对于内置调色板，打印图形中间条形块内显示了关于调色板的四个信息，以帮助大家进行快速记忆与选择。底部可现实颜色hex值及其中文名称。出于显示效果考虑，函数将该参数设置为非默认显示。
+- plot custom palettes
 
-- 打印自定义调色板
+color vector or named color vector object can be as input.
 
-对于自定义调色板，输入可以是颜色向量或向量对象名称。
-
-对于来自384种内置的颜色，支持显示中文名。
+Chinese name of the color can be plot only in case that all the colors
+from 384 colors collection.
 
 ``` r
-# 设置调色板名称
+#  color vector input and named palette tile 
 plot_palette(x = c("#99BCAC","#5F4321","#BA5140","#DD7694","#779649"),type = "custom",name = "Just for Test",show_text = T)
 ```
 
@@ -224,14 +267,14 @@ plot_palette(x = c("#99BCAC","#5F4321","#BA5140","#DD7694","#779649"),type = "cu
 
 ``` r
 
-# 未设置调色板名称。不显示颜色信息
+# no tilte and no color information plot
 plot_palette(x = c("#99BCAC","#5F4321","#BA5140","#DD7694","#779649"),type = "custom")
 ```
 
 <img src="figures/README-unnamed-chunk-12-2.png" width="100%" />
 
 ``` r
-# 输入向量名,调色板的名称将是向量名
+# object name as input,and the name given to the plot title
 
 test_pal <- c("#C67915","#2C2F3B","#9A6655","#A72126","#446A37","#5B3222")
 plot_palette(x = test_pal,type = "custom",show_text = T)
@@ -239,25 +282,27 @@ plot_palette(x = test_pal,type = "custom",show_text = T)
 
 <img src="figures/README-unnamed-chunk-13-1.png" width="100%" />
 
-### ctc_palette 定制调色板
+### ctc_palette Modify and Customize Palttes
 
-`ctc_palette`
-函数用于定制调色板，并被`scale_fill(color)_ctc_c/d/m`系列函数调用。
+Function `ctc_palette` designed to get and modify the built_in
+palettes,and pick the color from 384 colors collection to create new
+palettes.
 
-`type`参数默认为`built_in`,即内置调色板。
+The output of the function can be the color value input for many other
+plot function,also worked for scale_fill(color)\_ctc_c/d/m\` function in
+this package.
 
-#### 从内置调色板提取、定制
+#### Get and modify the built_in palettes
 
-和`plot_palette`
-一样，palette_name\`参数支持index，元素名称，调色板中英文名称四种类型。
+The same as `plot_palette` function, parameter `palette_name` accept the
+index number,element name,Chinese and English name for the palettes.
 
-`n`
-颜色数量，对于定性型调色板，不推荐设置的颜色数量大于调色板中颜色数量。
-
-一些示例：
+parametr `n` defined the number of color in your new palette,for
+qualitative palettes,It is strongly recommend the number DO NOT more
+than the number of the colors in the built_in palette.
 
 ``` r
-# index + 显示调色板，定义颜色数量及方向：颜色数量小于调色板数量，方向与调色板方向相反
+# input index number, with the color number and direction,and show_colors
 ctc_palette(palette_name = 2,n = 5,direction = 1,show_colors = T)
 #> Colors in the palette:
 #> [1] "#F9D3E3" "#ECB0C1" "#F6BEC8" "#DD7694" "#B83570"
@@ -267,7 +312,7 @@ ctc_palette(palette_name = 2,n = 5,direction = 1,show_colors = T)
 <img src="figures/README-unnamed-chunk-14-1.png" width="100%" />
 
     #> [1] "#F9D3E3" "#ECB0C1" "#F6BEC8" "#DD7694" "#B83570"
-    # 元素名称, 定义颜色数量：颜色数量大于调色板数量，默认方向及调色板显示选项
+    # input the element name and the color number more than the one in the target palette
     ctc_palette(palette_name = "seq02",n = 12,show_colors = T) 
     #> Colors in the palette:
     #>  [1] "#F9D3E3" "#F1BFD0" "#ECB1C1" "#F2B8C5" "#F1B0BE" "#E389A2" "#D2648A"
@@ -280,7 +325,8 @@ ctc_palette(palette_name = 2,n = 5,direction = 1,show_colors = T)
     #>  [8] "#BE4076" "#B1356C" "#A83666" "#9C375D" "#903754"
 
 ``` r
-## 发散型调色板的示例
+## example for diverging palettes 
+
 ctc_palette(type = "built_in",palette_name = 22, n = 5, direction = 1,  show_colors = T)
 #> Colors in the palette:
 #> [1] "#E60012" "#EA5514" "#F5F3F2" "#EFEFEF" "#A2D2E2"
@@ -295,7 +341,8 @@ ctc_palette(type = "built_in",palette_name = 22, n = 5, direction = 1,  show_col
     #>  [8] "#F0AB8D" "#E94D13" "#E71712" "#DE0E17" "#D12920"
 
 ``` r
-# 对于定性型调色板，颜色数量设置大于调色板颜色数量，会循环使用调色板中的颜色，不推荐使用。如无合适内置调色板，可自行定制。
+#  example for qualitative palettes
+# Can see what happened when n value more than the numbers of colors in the palette.
 ctc_palette(type = "built_in",palette_name = 44, n = 12,direction = 1,show_colors = T)
 #> Colors in the palette:
 #>  [1] "#C8161D" "#003460" "#B6A014" "#779649" "#A6559D" "#FEDC5E" "#94784F"
@@ -327,15 +374,16 @@ ctc_palette(type = "built_in",palette_name = 44, n = 12,direction = 1,show_color
     #> [1] "#C8161D" "#003460" "#B6A014" "#779649" "#A6559D" "#FEDC5E" "#94784F"
     #> [8] "#6E9BC5"
 
-#### 从内置颜色中选择颜色定制调色板
+#### Pick up colors from 384 colors to creat palettes
 
-此种模式下，`palette_name`调色板名称和`n`颜色数量两个以及`direction`颜色方向等参数失效。
+Under this type, parameter `palette_name`，`n` and `direction` cannot
+work,and you can make a palette by input the color_pick parameter(it is
+a list for color information).
 
-使用color_pick参数来选择颜色组别及子组序号和或颜色ID，也可以在这里输入颜色顺序要求等。
+As a list,it maybe hard to you to input,and function
+`create_color_pick`, special for generate the list make it easy.
 
-更方便的是使用`create_color_pick` 这个辅助函数，便捷的生成`抓色`list。
-
-- 定制一个9个颜色构成的发散型调色板
+- generate a diverging palette with 9 colors
 
 ``` r
  
@@ -346,7 +394,7 @@ color_pick_1 <- create_color_pick(groups = c(11,13,12),
 Palette_C <- ctc_palette(type = "custom",
             color_pick =color_pick_1,
             show_colors = T,
-            palette_title = "金波碧浪")
+            palette_title = "gold_blue")
 #> Colors in the palette:
 #> [1] "#C67915" "#DB9B34" "#FAC03D" "#FEDC5E" "#EBEEE8" "#9AA7B1" "#6B798E"
 #> [8] "#45465E" "#2C2F3B"
@@ -361,7 +409,7 @@ Palette_C
 #> [8] "#45465E" "#2C2F3B"
 ```
 
-- 定制一个6个颜色构成的定性型调色板
+- generate qualitative palettes with 6 colors
 
 ``` r
 color_pick_2 <- create_color_pick(groups = 10:15,
@@ -401,11 +449,9 @@ Palette_B
 #> [1] "#A72126" "#9A6655" "#C7C6B6" "#2C2F3B" "#C67915" "#C35C5D"
 ```
 
-### 在ggplot里使用调色板
+### Use the palette in ggplot
 
-`ctc_palette`函数输出一组颜色hex值，这些输出可直接作为颜色的value用于ggplot绘图。
-
-- 离散色 + 填充 场景
+- discrete + fill
 
 ``` r
 ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
@@ -415,7 +461,7 @@ ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
 
 <img src="figures/README-unnamed-chunk-19-1.png" width="100%" />
 
-或者直接使用已生成的定制调色板向量
+- use a named color vector object
 
 ``` r
 ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
@@ -425,9 +471,7 @@ ggplot(data = iris,aes(x = Species,y = Petal.Length,fill = Species))+
 
 <img src="figures/README-unnamed-chunk-20-1.png" width="100%" />
 
-- 离散色 + 颜色 场景
-
-选择内置定性型调色板
+- discrete + color
 
 ``` r
 ggplot(data = iris,aes(x = Sepal.Length  ,y = Sepal.Width  ,color = Species))+
@@ -437,9 +481,7 @@ ggplot(data = iris,aes(x = Sepal.Length  ,y = Sepal.Width  ,color = Species))+
 
 <img src="figures/README-unnamed-chunk-21-1.png" width="100%" />
 
-- 连续色 + 颜色 场景
-
-选择顺序型内置调色板
+- continuous + color
 
 ``` r
 ggplot(data = iris,aes(x = Species,y = Sepal.Width,color = Sepal.Width))+
@@ -449,9 +491,7 @@ ggplot(data = iris,aes(x = Species,y = Sepal.Width,color = Sepal.Width))+
 
 <img src="figures/README-unnamed-chunk-22-1.png" width="100%" />
 
-- 连续色 + 填充 场景
-
-本例使用前文中定制的发散型调色板向量。
+- continuous + fill
 
 ``` r
  
@@ -461,7 +501,7 @@ df$z <- (df$x - 10) * (df$y - 10)
 ggplot(df, aes(x, y, fill = z)) +
   geom_tile(color = "white", size = 0.3) +   
   scale_fill_gradientn(
-    colours = rev(Palette_C), # 进行反转，冷色代表负值，暖色代表正值。
+    colours = rev(Palette_C), # reverse the direction
     name = "Values",
   ) +
   labs(title = "Palette Test") +
@@ -475,40 +515,41 @@ ggplot(df, aes(x, y, fill = z)) +
 
 <img src="figures/README-unnamed-chunk-23-1.png" width="100%" />
 
-## 适配ggplot绘图：scales 标度系列函数及theme主题模版
+## Plot in ggplot :Scale Functions and Ttheme Templates
 
-### 六组 scales 标度系列函数：
+### Scale Function
 
-- scale_fill_ctc_d :离散色填充场景
+- scale_fill_ctc_d :fill for discrete data
 
-- scale_color_ctc_d：离散色颜色场景
+- scale_color_ctc_d：color for discrete data
 
-- scale_fill_ctc_c：连续色填充场景
+- scale_fill_ctc_c： fill for continuous data
 
-- scale_color_ctc_c：连续色颜色场景
+- scale_color_ctc_c： color for continuous data
 
-- scale_fill_ctc_m：定制色填充场景，只支持离散色场景
+- scale_fill_ctc_m： manual palette for fill,only for discrete data
 
-- scale_color_ctc_m：离散色颜色场景，只支持离散色场景
+- scale_color_ctc_m：manual palette for color,only for discrete data
 
-前四个函数支持将内置调色板作为输入，与`ctc_palette()`一样，支持四种输入调色板信息来获取内置调色板；
+`scale_color(fill)_ctc_m` function support taking custom color palettes
+as input; they are equivalent to the scale_fill(color)\_m() function in
+the ggplot. Meanwhile, they support color_pick lists, which can be
+generated by the create_color_pick() function or manually created,
+serving as a dedicated input channel for custom colors selected from the
+384 colors.
 
-后两个支持将定制的调色板作为输入；可等价于ggplot包中`scale_fill(color)_m()`函数;同时支持color_pick
-list，可由create_color_pick()函数生成，也可手动生成，属于384种颜色的专属定制色输入通道。
+Five sets of ggplot themes, created based on elements of traditional
+Chinese culture, are available. - theme_ctc_paper()
 
-### 五组ggplot绘图的theme主题，基于中国传统文化元素制作，可供选用。
+- theme_ctc_dunhuang()
 
-- theme_ctc_paper： 宣纸主题
+- theme_ctc_bronze()
 
-- theme_ctc_dunhuang：敦煌主题
+- theme_ctc_mineral()
 
-- theme_ctc_bronze：青铜器主题
+- theme_ctc_ink()
 
-- theme_ctc_mineral：大地主题
-
-- theme_ctc_ink：水墨山水画主题
-
-几个简单示例：
+some examples for these functions using in ggplot plotting.
 
 ``` r
  iris$sepal_group <- cut(
@@ -516,7 +557,7 @@ list，可由create_color_pick()函数生成，也可手动生成，属于384种
     breaks = 4,
    labels = paste0("组", 1:4)
  )
-# 使用调色板index值 + 敦煌绘图主题
+# in scale function ,input index number simply and use the "dunhuang" theme
  ggplot(iris, aes(x = Sepal.Width,
                        y = Petal.Width,
                        color = sepal_group)) +
@@ -529,7 +570,8 @@ list，可由create_color_pick()函数生成，也可手动生成，属于384种
 <img src="figures/README-unnamed-chunk-24-1.png" width="100%" />
 
 ``` r
- ggplot(mpg, aes(x = class, fill = class)) +
+# in scale function ,input index number simply and use the mineral theme
+ggplot(mpg, aes(x = class, fill = class)) +
  geom_bar() +
  scale_fill_ctc_d(palette_name = 41)+
  theme_ctc_mineral()
@@ -538,7 +580,7 @@ list，可由create_color_pick()函数生成，也可手动生成，属于384种
 <img src="figures/README-unnamed-chunk-25-1.png" width="100%" />
 
 ``` r
-# 使用调色板英文名称
+# in scale function ,input English name of the palette and use the paper theme
  ggplot(mtcars, aes(x = wt, y = mpg, color = hp)) +
  geom_point(size = 4) +
  scale_colour_ctc_c(palette_name = "violet_bloom", direction = -1)+
@@ -548,7 +590,7 @@ list，可由create_color_pick()函数生成，也可手动生成，属于384种
 <img src="figures/README-unnamed-chunk-26-1.png" width="100%" />
 
 ``` r
- #使用调色板中文名称 + 古铜主题
+ # in scale function ,input Chinese name of the palette and use the bronze theme
 ggplot(faithfuld, aes(x = eruptions, y = waiting, fill = density)) +
  geom_raster() +
  scale_fill_ctc_c(palette_name = "海天沙影", direction = 1, name = "Density")+
@@ -558,9 +600,10 @@ ggplot(faithfuld, aes(x = eruptions, y = waiting, fill = density)) +
 <img src="figures/README-unnamed-chunk-27-1.png" width="100%" />
 
 ``` r
- ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
+  # in scale function ,input a custom palette and use the "dunhuang" theme
+ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
  geom_point(shape = 21, size = 3) +
- scale_fill_ctc_m(color_pick = color_pick_2) + ## 本例使用前文中已完成的pick_colorlist。
+ scale_fill_ctc_m(color_pick = color_pick_2) + ## use a pick_color list as a custom palette input 
 theme_ctc_dunhuang(base_family = "sans")
 ```
 
@@ -571,7 +614,7 @@ Pal_b <- Palette_B[3:5]
  
 ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
  geom_point(shape = 21, size = 4,stroke = 0.8) +
- scale_fill_ctc_m(palette = Pal_b) + ## 支持输入颜色向量，此时等同于scale_fill_manual 函数
+ scale_fill_ctc_m(palette = Pal_b) + ## named color vector object is available,
  theme_ctc_bronze(base_family = "sans",oxidation_level = "light")
 ```
 
@@ -595,9 +638,9 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, fill = Species)) +
 
 ## Issues
 
-可以通过https://github.com/zhiming-chen/chinacolor/issues
-提交问题，反馈bug.
+Issues report：<https://github.com/zhiming-chen/chinacolor/issues>.
 
-也欢迎大家贡献配色方案及改进优化意见.
+Palettes contribution and suggestions for improvement and optimization
+is welcome!!
 
-公众号，知乎： 空行马天君； QQ邮箱：<25172952@qq.com>
+Gmail: <zhimingc383@gmail.com>
