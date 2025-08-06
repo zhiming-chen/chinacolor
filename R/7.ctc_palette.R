@@ -184,7 +184,7 @@ ctc_palette <- function(type = "built_in",
                 # When more colors are needed, handle differently by type
                 if (palette_type %in% c("sequential", "diverging")) {
                     # Sequential and diverging: use interpolation
-                    palette_type <- "continuous"
+                    # palette_type <- "continuous"
                     palette <- colorRampPalette(base_colors)(n)
                 } else {
                     # qualitative: cycle through base colors
@@ -321,9 +321,14 @@ ctc_palette <- function(type = "built_in",
 
     # Display color preview
     if (show_colors) {
-        color_names <- ifelse(all(palette %in% chinacolor$hex),
-                              chinacolor$name[match(palette, chinacolor$hex)],
-                              NULL)
+
+        color_names <-  if(all(palette %in% chinacolor$hex)){
+            chinacolor$name[match(palette, chinacolor$hex)]
+        } else{
+          NULL
+        }
+
+
         cat("Colors in the palette:\n")
         print(palette)
         cat("Number of colors:", length(palette), "\n")
