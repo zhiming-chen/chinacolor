@@ -53,7 +53,7 @@ alt="384 colors with group id" />
   term, each color has its means.
 
 <figure>
-<img src="[image/color/colors_by_solar_term/6_谷雨%20Grain%20Rain.png](https://github.com/zhiming-chen/chinacolor/blob/master/image/color/colors_by_solar_term/5_%E6%B8%85%E6%98%8E%20%20Pure%20Brightness.png)"
+<img src="https://github.com/zhiming-chen/chinacolor/blob/master/image/color/colors_by_solar_term/5_%E6%B8%85%E6%98%8E%20%20Pure%20Brightness.png"
 alt="colors for solar terms" />
 <figcaption aria-hidden="true">colors for solar terms</figcaption>
 </figure>
