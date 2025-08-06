@@ -85,9 +85,7 @@ remotes::install_github("zhiming-chen/chinacolor")
 plot_color_grid(show_group = T)
 ```
 
-可以在中查看全部24个节气的颜色系列。
-
-all the colors for 24 solar terms can found in the folder
+All the colors for 24 solar terms can found in the folder
 :[colors_by_solar_term](https://github.com/zhiming-chen/chinacolor/tree/master/image/color/colors_by_solar_term)
 
 ### list_colors Preview the colors in Viewer Panel
